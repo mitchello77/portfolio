@@ -1,6 +1,8 @@
 
 # Created by https://www.gitignore.io/api/node,sass,jekyll,windows
 
+_dist/
+
 ### Jekyll ###
 _site/
 .sass-cache/

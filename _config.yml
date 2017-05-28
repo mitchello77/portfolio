@@ -4,4 +4,4 @@ highlighter: rouge # or rouge or null
 # exclude: ["node_modules", "gulpfile.js", "package.json"]
 encoding: utf-8
 source: app/
-destination: dist/
+destination: _site/
