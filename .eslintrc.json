@@ -1,0 +1,25 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "jquery": true,
+    "serviceworker": true
+  },
+  "rules": {
+    "linebreak-style": 0,
+    "quotes": 0,
+    "no-undef": 1,
+    "camelcase": 0,
+    "indent": 0,
+    "comma-spacing": 1,
+    "no-inline-comments": 0,
+    "max-len": 0,
+    "no-unused-vars": 1,
+    "no-unused-vars": 0,
+    "require-jsdoc": 0,
+    "no-new-object": 0,
+    "no-native-reassign": 0,
+    "no-undef": 0
+
+  }
+}

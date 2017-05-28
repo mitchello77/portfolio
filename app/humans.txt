@@ -1,0 +1,11 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+  Mitchell Williams -- Project Lead
+  Kelvin O'Shea -- Project Lead
+
+# TECHNOLOGY COLOPHON
+
+  HTML5, CSS3, NODEJS, SCSS, JQUERY, D3, MOMENTJS, CHROMAJS
