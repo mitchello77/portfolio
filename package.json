@@ -9,10 +9,24 @@
   "author": "Shane Osbourne",
   "license": "ISC",
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-sass": "^3.1.0",
+    "apache-server-configs": "^2.14.0",
     "browser-sync": "^2.18.12",
-    "gulp-autoprefixer": "4.0.0"
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "4.0.0",
+    "gulp-cache": "^0.4.6",
+    "gulp-concat": "^2.6.0",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-eslint": "^3.0.1",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-if": "^2.0.2",
+    "gulp-imagemin": "^3.2.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.0",
+    "gulp-uglify": "^1.5.4",
+    "gulp-useref": "^3.1.0",
+    "pump": "^1.0.2",
+    "run-sequence": "^1.2.2"
   },
   "repository": {
     "type": "git",

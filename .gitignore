@@ -1,7 +1,8 @@
 
 # Created by https://www.gitignore.io/api/node,sass,jekyll,windows
 
-_dist/
+dist/
+.tmp/
 
 ### Jekyll ###
 _site/
