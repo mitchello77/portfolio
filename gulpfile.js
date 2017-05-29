@@ -17,6 +17,8 @@ const cache       = require('gulp-cache');
 const imagemin    = require('gulp-imagemin');
 const runSequence = require('run-sequence');
 
+const reload = browserSync.reload;
+
 
 
 var jekyll   = process.platform === 'win32' ? 'jekyll.bat' : 'jekyll';
@@ -31,6 +33,7 @@ gulp.task('jekyll-build', function (cb) {
   runSequence(
     'do-jekyll-build',
     'copy-styles',
+    'styles',
     cb
   );
 });
@@ -49,45 +52,67 @@ gulp.task('copy-styles', function() {
       .pipe(gulp.dest('_site/styles'));
 });
 
-/**
- * Rebuild Jekyll & do page reload
- */
-gulp.task('jekyll-rebuild', ['jekyll-build'], function () {
-    browserSync.reload();
+gulp.task('copy-scripts', function() {
+  return gulp.src([
+        'app/scripts/**/*.js'
+      ])
+      .pipe(gulp.dest('_site/styles'));
 });
 
-/**
- * Wait for jekyll-build, then launch the Server
- */
-gulp.task('browser-sync', ['sass', 'jekyll-build'], function() {
-    browserSync({
-        server: {
-            baseDir: '_site'
-        }
-    });
+gulp.task('styles-build', function (cb) {
+  runSequence(
+    'copy-styles',
+    'styles',
+    cb
+  );
 });
 
-/**
- * Watch scss files for changes & recompile
- * Watch html/md files, run jekyll & reload BrowserSync
- */
-gulp.task('watch', function () {
-    gulp.watch('app/_scss/*.scss', ['sass']);
-    gulp.watch(['app/**/*.html', 'app/_posts/*', 'app/_data/*'], ['jekyll-rebuild']);
+// Watch files for changes & reload
+gulp.task('serve', ['jekyll-build', 'lint'], function () {
+  browserSync({
+    notify: false,
+    // Customize the Browsersync console logging prefix
+    logPrefix: 'WSK',
+    // Allow scroll syncing across breakpoints
+    scrollElementMapping: ['main', '.mdl-layout'],
+    // Run as an https by uncommenting 'https: true'
+    // Note: this uses an unsigned certificate which on first access
+    //       will present a certificate warning in the browser.
+    // https: true,
+    server: ['_site'],
+    port: 3000
+  });
+
+  gulp.watch(['app/**/*.html'], ['jekyll-build', reload]);
+  gulp.watch(['app/styles/**/*.{scss,css}'], ['styles-build', reload]);
+  gulp.watch(['app/scripts/**/*.js'], ['lint', 'copy-scripts', reload]);
+  gulp.watch(['app/images/**/*'], reload);
 });
 
-// Do styles
+// Generate css after Jekyll Build
 gulp.task('styles', function () {
+  const AUTOPREFIXER_BROWSERS = [
+    'ie >= 10',
+    'ie_mob >= 10',
+    'ff >= 30',
+    'chrome >= 34',
+    'safari >= 7',
+    'opera >= 23',
+    'ios >= 7',
+    'android >= 4.4',
+    'bb >= 10'
+  ];
+
   return gulp.src([
     '_site/styles/**/*.scss',
-    '_site/styles/**/*.css',
     '!_site/styles/**/_*.scss'
   ])
-  .pipe(cache(imagemin({
-    progressive: true,
-    interlaced: true
-  })))
-  .pipe(gulp.dest('dist/images'))
+  .pipe(sass({
+      precision: 10,
+      onError: browserSync.notify
+  }))
+  .pipe(prefix(AUTOPREFIXER_BROWSERS))
+  .pipe(gulp.dest('_site/styles'))
 });
 
 // Complile sass and concat css into dist
@@ -142,7 +167,7 @@ gulp.task('scripts', function (done) {
 gulp.task('other_scripts', function (done) {
   pump([
     gulp.src([
-      './_site/scripts/main.js',
+      './_site/scripts/init.js',
       // Other scripts
     ]),
     sourcemaps.init(),
@@ -152,12 +177,38 @@ gulp.task('other_scripts', function (done) {
   ])
 });
 
+// Build and serve the output from the dist build
+gulp.task('serve:dist', ['default'], () =>
+  browserSync({
+    notify: false,
+    logPrefix: 'WSK',
+    // Allow scroll syncing across breakpoints
+    scrollElementMapping: ['main', '.mdl-layout'],
+    // Run as an https by uncommenting 'https: true'
+    // Note: this uses an unsigned certificate which on first access
+    //       will present a certificate warning in the browser.
+    // https: true,
+    server: 'dist',
+    port: 3001
+  })
+);
+
 // Lint JavaScipt
-gulp.task('lint', function () {
-  gulp.src(['_site/scripts/**/*.js','!node_modules/**'])
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(gulpif(!browserSync.active, eslint.failAfterError()))
+gulp.task('lint', () => {
+    // ESLint ignores files with "node_modules" paths.
+    // So, it's best to have gulp ignore the directory as well.
+    // Also, Be sure to return the stream from the task;
+    // Otherwise, the task may end before the stream has finished.
+    return gulp.src(['app/scripts/*.js','!node_modules/**'])
+        // eslint() attaches the lint output to the "eslint" property
+        // of the file object so it can be used by other modules.
+        .pipe(eslint())
+        // eslint.format() outputs the lint results to the console.
+        // Alternatively use eslint.formatEach() (see Docs).
+        .pipe(eslint.format())
+        // To have the process exit with an error code (1) on
+        // lint error, return the stream and pipe to failAfterError last.
+        .pipe(eslint.failAfterError());
 });
 
 // Scan your HTML for assets & optimize them
@@ -202,8 +253,8 @@ gulp.task('clean', function () {
 // Copy all files at the root level (app)
 gulp.task('copy', function () {
   gulp.src([
-    'app/*',
-    '!app/*.html',
+    '_site/*',
+    '!_site/*.html',
     'node_modules/apache-server-configs/dist/.htaccess'
   ], {
     dot: true

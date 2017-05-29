@@ -20,6 +20,6 @@
     "no-new-object": 0,
     "no-native-reassign": 0,
     "no-undef": 0
-
-  }
+  },
+  "quiet": false
 }
