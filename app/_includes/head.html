@@ -11,6 +11,8 @@
 
     <title>{% if page.title %}{{ site.name }} - {{ page.title }}{% else %}{{ site.name }}{% endif %}</title>
 
+    <link rel="icon" type="image/png" href="favicon.png"> <!-- 32px -->
+
     <!-- Disable tap highlight on IE -->
     <meta name="msapplication-tap-highlight" content="no">
 
@@ -20,23 +22,23 @@
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="No">
     <meta name="application-name" content="Mitchell Williams Portfolio">
-    <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
+    <link rel="icon" sizes="192x192" href="/images/touch/chrome-touch-icon-192x192.png">
 
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="No">
     <meta name="apple-mobile-web-app-status-bar-style" content="#78A4C0">
     <meta name="apple-mobile-web-app-title" content="Mitchell Williams Portfolio">
-    <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
+    <link rel="apple-touch-icon" href="/images/touch/apple-touch-icon.png">
 
     <!-- Tile icon for Win8 (144x144 + tile color) -->
-    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileImage" content="/images/touch/ms-touch-icon-144x144-precomposed.png">
     <meta name="msapplication-TileColor" content="#78A4C0">
 
     <!-- Color the status bar on mobile devices -->
     <meta name="theme-color" content="#78A4C0">
 
         <!-- STYLES -->
-    <link rel="stylesheet" type="text/css" href="styles/main.css">
+    <link rel="stylesheet" type="text/css" href="/styles/main.css">
 
     <!--[if lte IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -46,7 +48,9 @@
 
 
     <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto:300,400,700" rel="stylesheet">
 
     <link rel="canonical" href="{{ page.url | replace:"index.html","" | prepend: site.baseurl | prepend: site.url }}" />
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" />
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 </head>

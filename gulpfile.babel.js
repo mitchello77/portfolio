@@ -70,7 +70,7 @@ gulp.task('copy-styles', () => {
 
 // Lint JavaScript
 gulp.task('lint', () =>
-  gulp.src(['_site/scripts/**/*.js','!node_modules/**'])
+  gulp.src(['app/scripts/**/*.js','!node_modules/**'])
     .pipe($.eslint())
     .pipe($.eslint.format())
     .pipe($.if(!browserSync.active, $.eslint.failAfterError()))
@@ -78,7 +78,7 @@ gulp.task('lint', () =>
 
 // Optimize images
 gulp.task('images', () =>
-  gulp.src('_site/images/**/*')
+  gulp.src('app/images/**/*')
     .pipe($.cache($.imagemin({
       progressive: true,
       interlaced: true
@@ -143,7 +143,7 @@ gulp.task('scripts', () =>
         // Note: Since we are not using useref in the scripts build pipeline,
         //       you need to explicitly list your scripts here in the right order
         //       to be correctly concatenated
-        './_site/scripts/main.js'
+        './app/scripts/main.js'
         // Other scripts
       ]),
       $.newer('.tmp/scripts'),
@@ -151,6 +151,7 @@ gulp.task('scripts', () =>
       $.babel(),
       $.sourcemaps.write(),
       gulp.dest('.tmp/scripts'),
+      gulp.dest('_site/scripts'),
       $.concat('main.min.js'),
       $.uglify({preserveComments: 'some'}),
       $.size({title: 'scripts'}),
@@ -164,13 +165,14 @@ gulp.task('scripts', () =>
 // scripts we dont want to concat
 gulp.task('other_scripts', () =>
     gulp.src([
-      './_site/scripts/init.js'
+      './app/scripts/init.js'
     ])
       .pipe($.newer('.tmp/scripts'))
       .pipe($.sourcemaps.init())
       .pipe($.babel())
       .pipe($.sourcemaps.write())
       .pipe(gulp.dest('.tmp/scripts'))
+      .pipe(gulp.dest('_site/scripts'))
       .pipe($.uglify({preserveComments: 'some'}))
       // Output files
       .pipe($.size({title: 'other-scripts'}))
@@ -225,8 +227,8 @@ gulp.task('serve', ['jekyll-build', 'other_scripts','scripts', 'styles'], () => 
 
   gulp.watch(['app/**/*.html'], ['jekyll-build', reload]);
   gulp.watch(['app/styles/**/*.{scss,css}'], ['styles', reload]);
-  gulp.watch(['app/scripts/**/*.js'], ['lint', 'other_scripts', 'scripts', reload]);//  gulp.watch(['app/scripts/**/*.js'], ['lint', 'scripts', reload]);
-  gulp.watch(['app/images/**/*'], reload);
+  gulp.watch(['app/scripts/**/*.js'], ['jekyll-build', 'lint', 'other_scripts', 'scripts', reload]);//  gulp.watch(['app/scripts/**/*.js'], ['lint', 'scripts', reload]);
+  gulp.watch(['app/images/**/*'], ['jekyll-build', reload]);
 });
 
 // Build and serve the output from the dist build
