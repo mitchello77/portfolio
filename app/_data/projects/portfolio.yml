@@ -1,0 +1,27 @@
+title: Portfolio
+date: 2017/06/06
+link: htts://mitchell-williams.com.au
+type: website
+category: web development
+description: |
+
+reflection: |
+
+image:
+    url: http://fillmurray.com/400/300
+    title: "Project: Portfolio"
+    alt: A screenshot of the home page of my personal website mitchell-williams.com.au
+technology:
+        - Jekyll
+        - Ruby
+        - JavaScript
+        - HTML
+        - CSS
+        - JS
+        - jQuery
+        - AJAX
+        - Git
+tags:
+    - Responsive
+    - Mobile Friendly
+    - Personal Project
