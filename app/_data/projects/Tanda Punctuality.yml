@@ -1,0 +1,30 @@
+title: Tanda Punctuality
+date: 2017/04/25
+link: #
+type: Front-End Development
+category: Web Development
+basecolour: '#019ED9'
+highlight: false
+description: |
+  Welcome to my solution to the coding challenge 'Punctuality' presented by TandaHQ.
+  I decided to complete the challenge ‘Punctuality’ which is an per-employee summary of shift punctuality. I chose this challenge because it appealed to me and my technical prowess. I was also intesrested in 'Browser Rosters' and 'Pings' but I felt this was a nice mixture between front-end and back-end design/engineering and therefore would showcase my abilities.
+reflection: |
+
+image:
+    url: /images/projects/tandapunctuality.jpg
+    title: "Project: Tanda Punctuality"
+    alt: A screenshot of the Tanda Punctuality Module
+technology:
+        - Ruby
+        - API
+        - JavaScript
+        - HTML
+        - CSS
+        - jQuery
+        - AJAX
+        - Canvas
+        - NodeJS
+        - Github
+tags:
+    - Responsive
+    - Code Challenge

@@ -9,7 +9,7 @@
 
     <meta name="google-site-verification" content="">
 
-    <title>{% if page.title %}{{ site.name }} - {{ page.title }}{% else %}{{ site.name }}{% endif %}</title>
+    <title>{% if page.title %}{{ page.title }} | {{ site.name }}{% else %}{{ site.name }}{% endif %}</title>
 
     <link rel="icon" type="image/png" href="favicon.png"> <!-- 32px -->
 
@@ -48,7 +48,7 @@
 
 
     <!-- FONTS -->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,600|Roboto:300,400,700" rel="stylesheet">
 
     <link rel="canonical" href="{{ page.url | replace:"index.html","" | prepend: site.baseurl | prepend: site.url }}" />
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" />

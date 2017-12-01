@@ -3,6 +3,14 @@ layout: default
 title: Home
 ---
 <main>
+  <section id="welcome">
+    <div class="overlay">
+      <h2>Hi! I'm <span>Mitchell</span></h2>
+      <div class="sub">
+        I do <span id="welcometyper"></span><span class="animated infinite flash">|</span>
+      </div>
+    </div>
+  </section>
   <section id="mini-skills" class="dark">
     <h3><span>Skills</span></h3>
     <div>
@@ -19,7 +27,7 @@ title: Home
       <div class="col">
         <span class="icon icon_team"></span>
         <span class="title">Team Orintated</span>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vel nisi venenatis, congue magna sed, porttitor ipsum. Aenean nec velit. </p>
+        <p>Identifying team composition to help translate members and my own strengths into a realised solution. </p>
       </div>
       <div class="col">
         <span class="icon icon_cc"></span>
@@ -31,9 +39,15 @@ title: Home
   <section id="featured-projects">
     <h3><span>Some of my latest work</span></h3>
     <div class="owl-carousel owl-theme">
-      <div><a href="#"><img src="https://fillmurray.com/400/300" alt="" /></a></div>
-      <div><a href="#"><img src="https://fillmurray.com/400/300" alt="" /></a></div>
-      <div><a href="#"><img src="https://fillmurray.com/400/300" alt="" /></a></div>
+      {% assign projects = site.data.projects | get_projects_from_files | sort:'date' %}
+      {% for project in projects reversed limit:5 %}
+      <div class="item">
+        <a href="/{{ project.dir }}">
+          <img src="{{ project.image.url }}" alt="{{ project.image.alt }}" title="{{ project.image.title }}" />
+          <div class="title">{{ project.title }} | {{ project.category }}</div>
+        </a>
+      </div>
+      {% endfor %}
     </div>
   </section>
   <section id="mini-timeline" class="dark hidden">
@@ -45,20 +59,25 @@ title: Home
       <div class="comment">
       <p>Send me a message, I would love to hear from you.</p>
       </div>
-      <form id="comment_form">
+      <form id="contact_form" action="https://formspree.io/me@mitchell-williams.com.au" method="post">
+        <input type="hidden" name="_subject" id="subject" value="New Message From Contact Form!">
         <div>
           <input name="name" id="name" value="" placeholder="Name" type="text">
         </div>
         <div>
-          <input name="email" id="email" value="" placeholder="Email" type="email">
+          <input name="_replyto" id="email" value="" placeholder="Email" type="email">
         </div>
         <div>
-          <textarea rows="10" name="comment" id="comment" placeholder="Comment"></textarea>
+          <textarea rows="5" name="message" id="message" placeholder="message"></textarea>
         </div>
+        <input type="text" name="_gotcha" style="display:none">
         <div>
-          <input name="submit" value="Submit" type="submit">
+          <input name="submit" value="Send!" type="submit">
         </div>
       </form>
   </section>
 </main>
 {% include intro.html %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mhayes-twentytwenty/1.0.0/js/jquery.event.move.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mhayes-twentytwenty/1.0.0/js/jquery.twentytwenty.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.min.js"></script>

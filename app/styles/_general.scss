@@ -3,6 +3,7 @@ html {
   padding: 0;
   font-size: 62.5%;
   box-sizing: border-box;
+  min-height: 100vh;
 }
 
 *, *:before, *:after {
@@ -22,6 +23,7 @@ body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
   overflow: hidden;
+  min-height: 100vh;
 }
 
 body.loaded {
@@ -31,11 +33,12 @@ body.loaded {
 h1, h2, h3, h4, h5 {
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
+  line-height: 1.2em;
 }
 
 h2 {
   font-size: 6rem;
-  margin: 0.2em 0 0.2em 3rem;
+  margin: 0.2em 0 0.2em 0.3em;
 }
 
 h3 {
@@ -72,6 +75,14 @@ h3:before {
 
 a, a:visited,  {
   color: #000;
+}
+
+.wip {
+  padding: 0.5em 0;
+  background: #fafafa;
+  color: #999;
+  text-align: center;
+  margin: 0;
 }
 
 nav {
@@ -180,6 +191,46 @@ section{
   overflow: hidden;
 }
 
+#welcome {
+  padding: 0;
+  background: url("/images/banner.jpg") no-repeat;
+  background-size: cover;
+  background-position: right top;
+  color: #fff;
+  height: 40vh;
+  min-height: 200px;
+  max-height: 500px;
+  .overlay {
+    background-color: rgba(0,0,0,0.5);
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    h2 {
+      text-transform: uppercase;
+      padding: 0;
+      margin: 1rem;
+      margin-bottom: 0;
+      width: 65%;
+      font-weight: 200;
+      span {
+        font-weight: 400;
+      }
+    }
+    .sub {
+      margin: 1rem;
+      margin-left: 1.5rem;
+      margin-top: 0;
+      width: 50%;
+      overflow-x: visible;
+      white-space: nowrap;
+      font-weight: 200;
+      font-family: 'Montserrat', sans-serif;
+    }
+  }
+}
 
 #mini-skills {
   width: 100%;
@@ -226,10 +277,14 @@ section{
   display: flex;
   flex-wrap: wrap;
   .col {
-    height: 450px;
-    width: 50%;
+    min-height: 350px;
+    width: 60%;
+    min-width: 300px;
     &:nth-of-type(1){
       padding: 0 30px;
+    }
+    &:nth-of-type(2){
+      width: 40%;
     }
     .profileimg {
       width: 100%;
@@ -268,14 +323,18 @@ section{
       width: 50%;
       text-align: center;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       .icon {
         width: 100%;
         height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         span {
           display: block;
-          height: 250px;
+          height: 200px;
           width: 100%;
           background-size: contain;
           background-position: center center;
@@ -298,6 +357,144 @@ section{
   }
 }
 
+#featured-projects {
+  .owl-carousel {
+    .item {
+      box-shadow: 2px 2px 4px 2px rgba(0,0,0,.2);
+      border-radius: 5px;
+      overflow: hidden;
+      box-sizing: border-box;
+      margin-bottom: 5px;
+      margin-top: 5px;
+      a {
+        text-decoration: none;
+      }
+      .title {
+        text-align: center;
+        text-decoration: none;
+        font-size: 1.8rem;
+        margin-top: 0.5em;
+        color: #666;
+      }
+    }
+  }
+}
+
+#resume {
+  height: 95vh;
+}
+
+#portfolio-title {
+  height: 20vh;
+  min-height: 200px;
+  max-height: 400px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #fff;
+  img {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 0;
+    opacity: 0.2;
+    filter: blur(5px);
+    transform: scale(1.05);
+    z-index: 1
+  }
+  img ~ * {
+    z-index: 10;
+  }
+  h2 {
+    font-weight: 200;
+    span {
+      font-weight: 400;
+    }
+  }
+}
+
+#portfolio-grid {
+  #filters {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    li {
+      cursor: pointer;
+      text-transform: uppercase;
+      margin: 0 10px;
+      padding: 5px 10px;
+      padding-top: 6px;
+      color: #fff;
+      font-size: 1.8rem;
+      border: 3px solid rgba(0,0,0,0);
+      background-color: #3498DB;
+      box-sizing: border-box;
+      border-radius: 5px;
+      &:hover {
+        border-bottom-color: #E74C3C;
+      }
+    }
+    li.current {
+      background-color: #2980B9;
+    }
+  }
+  .portfolio-items {
+    .item {
+      position: relative;
+      width: 300px;
+      margin: 20px;
+      display: block;
+      text-decoration: none;
+      transition: all .3s;
+      &:hover {
+        opacity: 1 !important;
+      }
+      .inner {
+        width: 100%;
+        height: 100%;
+        border-style: solid;
+        border-width: 3px;
+        box-shadow: 1px 1px 2px 1px rgba(0,0,0,.2);
+        border-radius: 5px;
+        overflow: hidden;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        img {
+          width: 96%;
+          height: auto;
+          margin: 5px;
+          border-radius: 5px;
+          background-clip: padding-box;
+          align-self: center;
+        }
+        .title {
+          margin-top: 5px;
+          font-size: 1.8rem;
+          line-height: 1.9rem;
+          font-weight: 400;
+          margin-left: 20px;
+        }
+        .type {
+          font-size: 1.6rem;
+          font-weight: 300;
+          margin-left: 20px;
+        }
+      }
+    }
+    .item.dull {
+      opacity: 0.4;
+    }
+    .item.large {
+      width: 350px;
+    }
+  }
+}
+
 footer {
   width: 100%;
   min-height: 20px;
@@ -311,24 +508,24 @@ footer {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     padding: 10px 0;
+    .logo {
+      height: 50px;
+      width: 50px;
+      display: block;
+    }
     div {
       display: flex;
-      flex-wrap: nowrap;
       justify-content: center;
-      margin-bottom: 60px;
-      .logo {
-
-      }
+      margin-bottom: 30px;
       nav {
         ul {
-          a {
-            float: left;
-            height: 100%;
-            display: flex;
-            align-items: center;
+          display: flex;
+          flex-wrap: wrap;
+          li {
             box-sizing: border-box;
-            li {
+            a {
               color: #000;
               font-size: 18px;
               padding: 0 10px;

@@ -1,0 +1,39 @@
+---
+layout: default
+title: Projects
+---
+<main>
+  <section id="portfolio-header" class="tight dark">
+    <h2>Portfolio</h2>
+    <p>The portfolio can be filtered by the categories below!</p>
+  </section>
+  <section id="portfolio-grid">
+    <ul id="filters">
+      <li class="current" data-filter="*">All</li>
+      {% assign projects = site.data.projects | get_projects_from_files | sort:'category' %}
+      {% assign typeList = ',' %}
+      {% for project in projects %}
+        {% capture compareType %},{{project.category}},{% endcapture %}
+        {% if typeList contains compareType %}{% else %}
+          <li data-filter=".{{ project.category | slugify }}">{{ project.category }}</li>
+          {% capture tempList %}{{typeList}}{{project.category}},{% endcapture %}
+          {% assign typeList = tempList %}
+        {% endif %}
+      {% endfor %}
+    </ul>
+    <div class="portfolio-items">
+      {% assign projects = site.data.projects | get_projects_from_files | sort:'date' %}
+      {% for project in projects reversed %}
+      <a class="item {{ project.category | slugify }} {% if project.highlight %} large {% endif %}" href="/{{ project.dir }}">
+        <div class="inner" style="border-color: {{ project.basecolour }};">
+          <img src="{{ project.image.url }}" alt="{{ project.image.alt }}" title="{{ project.image.title }}" />
+          <div class="title">{{ project.title }}</div>
+          <div class="type">{{ project.type }}</div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+
+  </section>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js"></script>

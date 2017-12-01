@@ -1,0 +1,19 @@
+title: Cheeky Bevy
+date: 2016/10/15
+link: https://www.facebook.com/cheekybevy/
+type: Simulated Business
+category: Marketing
+basecolour: '#ff5757'
+highlight: false
+description: |
+  Cheeky Bevy was a business I developed as part of a university subject. A real market place was simulated and the entire process to developing a small business was covered. The result was two market days where our business sold out products. Cheeky Bevy offered a range of sweet-flavoured beverages and was themed to current trends that resonate with the target audience.
+reflection: |
+
+image:
+    url: /images/projects/cheekybevy.jpg
+    title: "Project: Cheeky Bevy"
+    alt: A screenshot of the Facebook page of Cheeky Bevy
+technology:
+      - nil
+tags:
+    - University Assignment

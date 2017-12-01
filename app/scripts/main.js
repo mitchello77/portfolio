@@ -1,58 +1,123 @@
 // Varibles
 var keys = {37: 1, 38: 1, 39: 1, 40: 1};
-var theater = theaterJS({"autoplay": false, "minSpeed": 60, "maxSpeed": 450});
+var introtheater;
+var hometheater;
+var objIntro = $('#intro');
+var objWelcome =$('#welcome');
 
 $(window).on('load', function() {
   // hide preloader
   $('body').addClass('loaded');
   $('#pre-loader').addClass('hidden');
-  theater.play();
-  $('.twentytwenty-handle').mousedown( function() {
-    $('.prompt').fadeOut();
-  });
+  if (objWelcome.length) {
+    hometheater.play();
+  }
+  if (objIntro.length) {
+    introtheater.play();
+    $('.twentytwenty-handle').mousedown( function() {
+      $('.prompt').fadeOut();
+    });
+  }
 });
 
 $(function() {
   // Varibles after DOM construction
-  var objIntro = $('#intro');
+
 
   // -------------------
   console.log("JQuery Version: " + $.fn.jquery );
-  if (objIntro !== undefined) {
+  FastClick.attach(document.body);
+  introtheater = theaterJS({"autoplay": false, "minSpeed": 60, "maxSpeed": 450});
+  hometheater = theaterJS({"autoplay": false, "minSpeed": 60, "maxSpeed": 450});
+  if (objWelcome.length) {
+    hometheater.addActor('welcometyper').addScene('welcometyper:...', 3000).addScene('welcometyper:Programming.', 2000).addScene('welcometyper:Web Design.', 2000).addScene('welcometyper:Content Creation.', 2000).addScene('welcometyper:Digital Marketing', 2000).addScene('welcometyper:System Dev', 2000).addScene(hometheater.replay);
+    // FitText
+    $('#welcome h2').fitText(0.9);
+    $('#welcome .sub').fitText(1.1);
+  }
+  if (objIntro.length) {
     // FitText
     $('#intro h1').fitText(1.22);
     //theater
-    theater.addActor('typer').addScene('typer:...', 3000).addScene('typer:Coder.', 2000).addScene('typer:Designer.', 2000).addScene('typer:Tech Lover.', 2000).addScene('typer:Nerd?', 500).addScene(theater.replay);
+    introtheater.addActor('introtyper').addScene('introtyper:...', 3000).addScene('introtyper:Programmer.', 2000).addScene('introtyper:Designer.', 2000).addScene('introtyper:Marketer.', 2000).addScene('introtyper:Devoloper.', 2000).addScene('introtyper:Tech Lover.', 2000).addScene('introtyper:Nerd?', 500).addScene(introtheater.replay);
     $(window).scroll(function () {
       if (objIntro.hasClass('hidden') == false) {
         hideIntro(objIntro);
+        $(window).off('scroll');
       }
+    });
+    $('#intro .scroll').on('click', function() {
+      hideIntro(objIntro);
+      $('#intro .scroll').off('click');
+    });
+    $('#before-after').imagesLoaded( function() {
+      $('#before-after').twentytwenty({
+        default_offset_pct: 0.40
+      });
     });
   };
 
   //scroll Reveal
   window.sr = ScrollReveal();
-  sr.reveal('#mini-skills .col', {origin: 'left', delay: '250', distance: '40px'});
-
-  $('#before-after').imagesLoaded( function() {
-    $('#before-after').twentytwenty({
-      default_offset_pct: 0.40
+  if ($('#mini-skills').length) {
+    sr.reveal('#mini-skills .col', {origin: 'left', delay: '250', distance: '40px'});
+  }
+  if ($('#featured-projects').length) {
+    $("#featured-projects .owl-carousel").owlCarousel({
+      margin: 20,
+      center: true,
+      dotsEach: true,
+      loop: true,
+      responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:2
+        },
+        960:{
+            items:3
+        }
+      }
     });
-  });
+  }
 
-  $("#featured-projects .owl-carousel").owlCarousel({
-    margin: 20,
-    center: true,
-    dotsEach: true,
-    loop: true
-  });
+  //isotope
+  if ($('#portfolio-grid .portfolio-items').length) {
+    var portfolio = $('#portfolio-grid .portfolio-items').imagesLoaded( function() {
+      // init Isotope after all images have loaded
+      portfolio.isotope({
+        // options...
+        itemSelector: '.item',
+        percentPosition: true,
+        masonry: {}
+      });
+    });
+    // filter items on button click
+    $('#portfolio-grid #filters li').on( 'click', function() {
+      var filterValue = $(this).attr('data-filter');
+      portfolio.isotope({ filter: filterValue });
+    });
+  }
+
+  // portfolio items hover
+  if ($('#portfolio-grid .portfolio-items').length) {
+    $('#portfolio-grid .portfolio-items .item').hover( function () {
+      // mouse over
+      $('#portfolio-grid .portfolio-items .item').addClass("dull");
+    }, function () {
+      // mouse exit
+      $('#portfolio-grid .portfolio-items .item').removeClass("dull");
+    });
+
+  }
 
 }); // END Window Ready
 
 function hideIntro (obj) {
   window.scrollTo(0, 0);
   // animate it away
-  theater.stop();
+  introtheater.stop();
   obj.animateCss('bounceOutUp');
     obj.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
       window.scrollTo(0, 0);

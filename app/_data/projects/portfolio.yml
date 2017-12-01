@@ -1,14 +1,16 @@
 title: Portfolio
 date: 2017/06/06
-link: htts://mitchell-williams.com.au
-type: website
-category: web development
+link: https://mitchell-williams.com.au
+type: Content Management System
+category: Web Development
+basecolour: '#2C3E50'
+highlight: false
 description: |
 
 reflection: |
 
 image:
-    url: http://fillmurray.com/400/300
+    url: /images/projects/portfolio.jpg
     title: "Project: Portfolio"
     alt: A screenshot of the home page of my personal website mitchell-williams.com.au
 technology:
@@ -17,10 +19,10 @@ technology:
         - JavaScript
         - HTML
         - CSS
-        - JS
         - jQuery
         - AJAX
-        - Git
+        - NodeJS
+        - Github
 tags:
     - Responsive
     - Mobile Friendly

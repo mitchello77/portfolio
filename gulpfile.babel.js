@@ -68,14 +68,6 @@ gulp.task('copy-styles', () => {
       .pipe(gulp.dest('_site/styles'));
 });
 
-// Lint JavaScript
-gulp.task('lint', () =>
-  gulp.src(['app/scripts/**/*.js','!node_modules/**'])
-    .pipe($.eslint())
-    .pipe($.eslint.format())
-    .pipe($.if(!browserSync.active, $.eslint.failAfterError()))
-);
-
 // Optimize images
 gulp.task('images', () =>
   gulp.src('app/images/**/*')
@@ -227,7 +219,7 @@ gulp.task('serve', ['jekyll-build', 'other_scripts','scripts', 'styles'], () => 
 
   gulp.watch(['app/**/*.html'], ['jekyll-build', reload]);
   gulp.watch(['app/styles/**/*.{scss,css}'], ['styles', reload]);
-  gulp.watch(['app/scripts/**/*.js'], ['jekyll-build', 'lint', 'other_scripts', 'scripts', reload]);//  gulp.watch(['app/scripts/**/*.js'], ['lint', 'scripts', reload]);
+  gulp.watch(['app/scripts/**/*.js'], ['jekyll-build', 'other_scripts', 'scripts', reload]);
   gulp.watch(['app/images/**/*'], ['jekyll-build', reload]);
 });
 
@@ -251,7 +243,7 @@ gulp.task('serve:dist', ['default'], () =>
 gulp.task('default', ['clean', 'jekyll-build'], cb =>
   runSequence(
     'styles',
-    ['lint', 'html','other_scripts', 'scripts', 'images', 'copy'], //['lint', 'html', 'scripts', 'images', 'copy'],
+    ['html','other_scripts', 'scripts', 'images', 'copy'],
     'generate-service-worker',
     cb
   )
