@@ -42,8 +42,8 @@ title: Home
       {% assign projects = site.data.projects | get_projects_from_files | sort:'date' %}
       {% for project in projects reversed limit:5 %}
       <div class="item">
-        <a href="/{{ project.dir }}">
-          <img src="{{ project.image.url }}" alt="{{ project.image.alt }}" title="{{ project.image.title }}" />
+        <a href="{{ site.baseurl }}/{{ project.dir }}">
+          <img src="{{ site.baseurl }}/{{ project.image.url }}" alt="{{ project.image.alt }}" title="{{ project.image.title }}" />
           <div class="title">{{ project.title }} | {{ project.category }}</div>
         </a>
       </div>

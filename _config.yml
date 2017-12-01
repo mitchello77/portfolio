@@ -3,8 +3,8 @@ email: me@mitchell-williams.com.au
 description: >
   The personal website, portfolio of Mitchell Williams: programmer, web developer,
   and XX.
-baseurl: "" # the subpath of your site, e.g. /blog/
-url: "https://mitchell-williams.com.au" # the base hostname & protocol for your site
+baseurl: "/portfolio2017" # the subpath of your site, e.g. /blog/
+url: "https://projects.mitchell-williams.com.au" # the base hostname & protocol for your site
 markdown: redcarpet
 highlighter: rouge # or rouge or null
 # exclude: ["node_modules", "gulpfile.js", "package.json"]

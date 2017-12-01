@@ -182,7 +182,7 @@ gulp.task('html', () => {
     }))
 
     // Minify any HTML
-    .pipe($.if('*.html', $.htmlmin({
+    /* .pipe($.if('*.html', $.htmlmin({
       removeComments: true,
       collapseWhitespace: true,
       collapseBooleanAttributes: true,
@@ -192,7 +192,7 @@ gulp.task('html', () => {
       removeScriptTypeAttributes: true,
       removeStyleLinkTypeAttributes: true,
       removeOptionalTags: false
-    })))
+    }))) */
     // Output files
     .pipe($.if('*.html', $.size({title: 'html', showFiles: true})))
     .pipe(gulp.dest('dist'));
@@ -243,7 +243,7 @@ gulp.task('serve:dist', ['default'], () =>
 gulp.task('default', ['clean', 'jekyll-build'], cb =>
   runSequence(
     'styles',
-    ['html','other_scripts', 'scripts', 'images', 'copy'],
+    ['html','images', 'copy'], //['html','other_scripts', 'scripts', 'images', 'copy'],
     'generate-service-worker',
     cb
   )
